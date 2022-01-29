@@ -3,6 +3,7 @@ package com.dev.controleGastos.controller;
 import com.dev.controleGastos.model.Lancamento;
 import com.dev.controleGastos.model.TipoLancamento;
 import com.dev.controleGastos.service.CategoriaService;
+import com.dev.controleGastos.service.ContaService;
 import com.dev.controleGastos.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class LancamentoController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private ContaService contaService;
+
     @GetMapping
     public ModelAndView categoria(){
         ModelAndView mv = new ModelAndView("lancamento/cadastro");
@@ -29,6 +33,7 @@ public class LancamentoController {
         mv.addObject("lancamentos", service.getLancamentos());
         mv.addObject("tipos", TipoLancamento.values());
         mv.addObject("categorias", categoriaService.getCategoria());
+        mv.addObject("contas", contaService.getContas());
         return mv;
     }
 
