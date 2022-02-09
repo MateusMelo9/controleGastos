@@ -10,14 +10,14 @@ layout:decorate="layout/layout-padrao">
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Categoria Lançamento</h3>
-                        <p class="text-subtitle text-muted">Cadastro de Categoria Lançamento</p>
+                        <h3>Parceria</h3>
+                        <p class="text-subtitle text-muted">Cadastro de Parceria</p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a th:href="@{/index}">Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro Categoria Lançamento</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro Parceria</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,35 +32,29 @@ layout:decorate="layout/layout-padrao">
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" th:action="@{/categoria/cadastro}" th:object="${categoria}" method="post">
+                                    <form class="form" th:action="@{/parceria/cadastro}" method="post">
                                         <div class="row">
-                                            <div class="col-md-3 mb-4">
-                                                <fieldset class="form-group">
-                                                    <label>Tipo Categoria</label>
-                                                    <select th:field="${categoria.tipoCategoria}" class="form-select" id="tipoSelect">
-                                                        <option value="">Escolha o Tipo</option>
-                                                        <option th:each="tipo : ${tipoCategorias}"
-                                                                th:value="${tipo.id}"
-                                                                th:text="${tipo.nome}">
-                                                        </option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-nome-column">Nome</label>
-                                                    <input type="text" id="first-nome-column" class="form-control"
-                                                           placeholder="Nome" name="nome"  th:field="${categoria.nome}">
+                                                    <label for="first-name-column">Nome</label>
+                                                    <input type="text" id="first-name-column" class="form-control"
+                                                           placeholder="Nome" name="nome">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-descricao-column">Descriçao</label>
-                                                    <input type="text" id="first-descricao-column" class="form-control"
-                                                           placeholder="Descriçao" name="descricao"  th:field="${categoria.descricao}">
+                                                    <label for="first-rua-column">Percentual</label>
+                                                    <input type="text" id="first-rua-column" class="form-control"
+                                                           placeholder="Percentual" name="percentual">
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-bairro-column">Valor Investido</label>
+                                                    <input type="text" id="first-bairro-column" class="form-control"
+                                                           placeholder="Valor Investido" name="valorInvestido">
+                                                </div>
+                                            </div>
                                             <div class="col-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Salvar</button>
                                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Cancelar</button>
@@ -78,7 +72,7 @@ layout:decorate="layout/layout-padrao">
                     <div class="col-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Lista de Categorias Lançamento</h4>
+                                <h4 class="card-title">Lista de Lançamentos</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -87,16 +81,16 @@ layout:decorate="layout/layout-padrao">
                                         <table class="table table-lg">
                                             <thead>
                                             <tr>
-                                                <th>Tipo</th>
                                                 <th>Nome</th>
-                                                <th>Descricao</th>
+                                                <th>Percentual</th>
+                                                <th>Valor Investido</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="categoria : ${categorias}" class="border_bottom">
-                                                <td th:text="${categoria.tipoCategoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.descricao}" class="text-bold-500"></td>
+                                            <tr th:each="parceria : ${parcerias}" class="border_bottom">
+                                                <td th:text="${parceria.nome}" class="text-bold-500"></td>
+                                                <td th:text="${parceria.percentual}" class="text-bold-500"></td>
+                                                <td th:text="${parceria.valorInvestido}" class="text-bold-500"></td>
                                             </tr>
                                             </tbody>
                                         </table>

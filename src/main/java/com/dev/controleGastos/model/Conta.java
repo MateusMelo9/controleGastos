@@ -21,13 +21,13 @@ public class Conta implements Serializable {
     private Integer id;
     private String agencia;
     private String conta;
+    private double saldo;
 
     @ManyToOne
     @JoinColumn(name = "id_banco")
     private Banco banco;
 
-    @OneToMany
-    @JoinColumn(name = "id_conta")
+    @OneToMany(mappedBy = "conta")
     private List<Lancamento> lancamentos;
 
 }

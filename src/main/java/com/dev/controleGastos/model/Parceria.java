@@ -21,9 +21,4 @@ public class Parceria implements Serializable {
     public String nome;
     private double percentual;
     private double valorInvestido;
-
-    @ManyToOne
-    @JoinColumn(name = "id_casa")
-    private Casa casa;
-
 }

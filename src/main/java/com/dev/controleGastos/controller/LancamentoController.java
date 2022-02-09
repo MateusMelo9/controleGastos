@@ -1,10 +1,10 @@
 package com.dev.controleGastos.controller;
 
+import com.dev.controleGastos.model.CategoriaLancamento;
 import com.dev.controleGastos.model.Lancamento;
+import com.dev.controleGastos.model.TipoCategoria;
 import com.dev.controleGastos.model.TipoLancamento;
-import com.dev.controleGastos.service.CategoriaService;
-import com.dev.controleGastos.service.ContaService;
-import com.dev.controleGastos.service.LancamentoService;
+import com.dev.controleGastos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +21,16 @@ public class LancamentoController {
     private LancamentoService service;
 
     @Autowired
-    private CategoriaService categoriaService;
+    private CasaService casaService;
+
+    @Autowired
+    private CategoriaLancamentoService categoriaLancamentoService;
 
     @Autowired
     private ContaService contaService;
+
+    @Autowired
+    private TipoCategoriaService tipoCategoriaService;
 
     @GetMapping
     public ModelAndView categoria(){
@@ -32,8 +38,10 @@ public class LancamentoController {
         mv.addObject("lancamento", new Lancamento());
         mv.addObject("lancamentos", service.getLancamentos());
         mv.addObject("tipos", TipoLancamento.values());
-        mv.addObject("categorias", categoriaService.getCategoria());
+        mv.addObject("casas", casaService.getCasas());
+        mv.addObject("categorias",categoriaLancamentoService.getCategoriasLancamento());
         mv.addObject("contas", contaService.getContas());
+        mv.addObject("tiposCategoria", tipoCategoriaService.getTipoCategoria());
         return mv;
     }
 

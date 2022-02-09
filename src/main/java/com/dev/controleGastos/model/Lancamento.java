@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -23,6 +22,7 @@ public class Lancamento implements Serializable {
     private TipoLancamento tipo;
     private Date data;
     private double valor;
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "id_conta")
@@ -30,9 +30,9 @@ public class Lancamento implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+    private CategoriaLancamento categoria;
 
-    @OneToMany
-    @JoinColumn(name = "id_lacamento")
-    private List<LancamentoBaixa> lancamentoBaixas;
+    @ManyToOne
+    @JoinColumn(name = "id_casa")
+    private Casa casa;
 }

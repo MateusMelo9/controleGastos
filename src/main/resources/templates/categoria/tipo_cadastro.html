@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="layout/layout-padrao">
-
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout-padrao">
 <section layout:fragment="custom-content">
     <div id="main">
         <div class="page-heading">
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Categoria Lançamento</h3>
-                        <p class="text-subtitle text-muted">Cadastro de Categoria Lançamento</p>
+                        <h3>Tipo de Categoria</h3>
+                        <p class="text-subtitle text-muted">Cadastro Tipo de Categoria</p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a th:href="@{/index}">Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro Categoria Lançamento</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro Tipo de Categoria</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,35 +31,15 @@ layout:decorate="layout/layout-padrao">
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" th:action="@{/categoria/cadastro}" th:object="${categoria}" method="post">
+                                    <form class="form" th:action="@{/categoria/cadastro/tipo}" method="post">
                                         <div class="row">
-                                            <div class="col-md-3 mb-4">
-                                                <fieldset class="form-group">
-                                                    <label>Tipo Categoria</label>
-                                                    <select th:field="${categoria.tipoCategoria}" class="form-select" id="tipoSelect">
-                                                        <option value="">Escolha o Tipo</option>
-                                                        <option th:each="tipo : ${tipoCategorias}"
-                                                                th:value="${tipo.id}"
-                                                                th:text="${tipo.nome}">
-                                                        </option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-md-4 col-12">
+                                            <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-nome-column">Nome</label>
-                                                    <input type="text" id="first-nome-column" class="form-control"
-                                                           placeholder="Nome" name="nome"  th:field="${categoria.nome}">
+                                                    <label for="last-name-column">Nome do Categoria</label>
+                                                    <input type="text" id="last-name-column" class="form-control"
+                                                           placeholder="Nome" name="nome">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-descricao-column">Descriçao</label>
-                                                    <input type="text" id="first-descricao-column" class="form-control"
-                                                           placeholder="Descriçao" name="descricao"  th:field="${categoria.descricao}">
-                                                </div>
-                                            </div>
-
                                             <div class="col-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Salvar</button>
                                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Cancelar</button>
@@ -78,7 +57,7 @@ layout:decorate="layout/layout-padrao">
                     <div class="col-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Lista de Categorias Lançamento</h4>
+                                <h4 class="card-title">Lista de Categorias</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -87,16 +66,12 @@ layout:decorate="layout/layout-padrao">
                                         <table class="table table-lg">
                                             <thead>
                                             <tr>
-                                                <th>Tipo</th>
                                                 <th>Nome</th>
-                                                <th>Descricao</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="categoria : ${categorias}" class="border_bottom">
-                                                <td th:text="${categoria.tipoCategoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.descricao}" class="text-bold-500"></td>
+                                            <tr th:each="tipo : ${tipoCategorias}">
+                                                <td th:text="${tipo.nome}" class="text-bold-500"></td>
                                             </tr>
                                             </tbody>
                                         </table>

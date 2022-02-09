@@ -9,13 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Investimento implements Serializable {
+public class TipoCategoria implements Serializable {
 
     private static final long serialVersionUis = 1L;
 
@@ -23,8 +22,4 @@ public class Investimento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nome;
-    private double valor;
-    private Date dataRecebido;
-    private Date dataPagamento;
-    private String descricao;
 }

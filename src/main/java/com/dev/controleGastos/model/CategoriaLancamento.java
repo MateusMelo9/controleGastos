@@ -6,25 +6,25 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LancamentoBaixa implements Serializable {
+public class CategoriaLancamento implements Serializable {
 
     private static final long serialVersionUis = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private TipoLancamento tipo;
-    private Date dataPagamento;
-    private double valor;
+    private String nome;
+    private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_lacamento")
-    private Lancamento lacamento;
+    @OneToOne
+    private TipoCategoria tipoCategoria;
 
+    @OneToMany(mappedBy = "categoria")
+    private List<Lancamento> lancamentos;
 }

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/layout-padrao">
+
+<section layout:fragment="custom-content">
+    <div id="main">
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>Casa</h3>
+                        <p class="text-subtitle text-muted">Cadastro de Casa</p>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a th:href="@{/index}">Inicio</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro Casa</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <section id="multiple-column-form">
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Cadastro</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form" th:action="@{/casa/cadastro}" th:object="${casa}" method="post">
+                                        <div class="row">
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-name-column">Casa</label>
+                                                    <input type="text" id="first-name-column" class="form-control"
+                                                           placeholder="Nome" name="nome"  th:field="${casa.nome}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-valor-column">Valor</label>
+                                                    <input type="text" id="first-valor-column" class="form-control"
+                                                           placeholder="Valor" name="valor"  th:field="${casa.terreno.valor}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-td-column">Taxa Documentacao</label>
+                                                    <input type="text" id="first-td-column" class="form-control"
+                                                           placeholder="Taxa Documentacao" name="taxaDocumentacao"  th:field="${casa.terreno.taxaDocumentacao}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-rua-column">Rua</label>
+                                                    <input type="text" id="first-rua-column" class="form-control"
+                                                           placeholder="Rua" name="rua"  th:field="${casa.terreno.endereco.rua}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-bairro-column">Bairro</label>
+                                                    <input type="text" id="first-bairro-column" class="form-control"
+                                                           placeholder="Bairro" name="bairro"  th:field="${casa.terreno.endereco.bairro}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-cidade-column">Cidade</label>
+                                                    <input type="text" id="first-cidade-column" class="form-control"
+                                                           placeholder="Cidade" name="cidade"  th:field="${casa.terreno.endereco.cidade}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-cep-column">CEP</label>
+                                                    <input type="text" id="first-cep-column" class="form-control"
+                                                           placeholder="CEP" name="cep"  th:field="${casa.terreno.endereco.cep}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-np-column">Parceria</label>
+                                                    <input type="text" id="first-np-column" class="form-control"
+                                                           placeholder="Nome" name="nome" th:field="${casa.parceria.nome}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-perc-column">Percentual</label>
+                                                    <input type="text" id="first-perc-column" class="form-control"
+                                                           placeholder="Percentual" name="percentual" th:field="${casa.parceria.percentual}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-vi-column">Valor Investido</label>
+                                                    <input type="text" id="first-vi-column" class="form-control"
+                                                           placeholder="Valor Investido" name="valorInvestido" th:field="${casa.parceria.valorInvestido}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Salvar</button>
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="row" id="basic-table">
+                    <div class="col-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Lista de Lançamentos</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <!-- Table with outer spacing -->
+                                    <div class="table-responsive">
+                                        <table class="table table-lg">
+                                            <thead>
+                                            <tr>
+                                                <th>Nome Casa</th>
+                                                <th>Valor Terreno</th>
+                                                <th>Taxa Documentacao</th>
+                                                <th>Rua</th>
+                                                <th>Bairro</th>
+                                                <th>Cidade</th>
+                                                <th>CEP</th>
+                                                <th>Parceria</th>
+                                                <th>Percentual</th>
+                                                <th>Valor Investido</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="casa : ${casas}" class="border_bottom">
+                                                <td th:text="${casa.nome}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.valor}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.taxaDocumentacao}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.endereco.rua}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.endereco.bairro}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.endereco.cidade}" class="text-bold-500"></td>
+                                                <td th:text="${casa.terreno.endereco.cep}" class="text-bold-500"></td>
+                                                <td th:text="${casa.parceria.nome}" class="text-bold-500"></td>
+                                                <td th:text="${casa.parceria.percentual}" class="text-bold-500"></td>
+                                                <td th:text="${casa.parceria.valorInvestido}" class="text-bold-500"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+</html>

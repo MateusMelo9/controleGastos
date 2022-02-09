@@ -1,13 +1,16 @@
 package com.dev.controleGastos.controller;
 
-import com.dev.controleGastos.model.Categoria;
-import com.dev.controleGastos.service.CategoriaService;
+import com.dev.controleGastos.model.CategoriaLancamento;
+import com.dev.controleGastos.model.TipoCategoria;
+import com.dev.controleGastos.service.CategoriaLancamentoService;
+import com.dev.controleGastos.service.FornecedorService;
+import com.dev.controleGastos.service.TipoCategoriaService;
+import com.dev.controleGastos.service.exception.CategoriaJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -15,18 +18,54 @@ import org.springframework.web.servlet.ModelAndView;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaService service;
+    private TipoCategoriaService tipoCategoriaService;
+
+    @Autowired
+    private CategoriaLancamentoService categoriaLancamentoService;
+
+    @Autowired
+    private FornecedorService fornecedorService;
 
     @GetMapping
-    public ModelAndView categoria(){
+    public ModelAndView categoriaLancamento(){
         ModelAndView mv = new ModelAndView("categoria/cadastro");
-        mv.addObject("categorias", service.getCategoria());
+        mv.addObject("categoria", new CategoriaLancamento());
+        mv.addObject("tipoCategorias", tipoCategoriaService.getTipoCategoria());
+        mv.addObject("categorias", categoriaLancamentoService.getCategoriasLancamento());
+        mv.addObject("fornecedores",fornecedorService.getForncedores());
         return mv;
     }
 
     @PostMapping("/cadastro")
-    public String cadastrar(@ModelAttribute Categoria categoria){
-        service.salvar(categoria);
+    public String cadastrar(@ModelAttribute CategoriaLancamento categoriaLancamento){
+        try {
+            categoriaLancamentoService.salvar(categoriaLancamento);
+        }catch (Exception e){
+            System.out.println("Lançar o erro para a tela!!!!");
+        }
         return "redirect:/categoria";
+    }
+
+    @RequestMapping(value = "/cadastro/rapido", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody ResponseEntity<?> cadastrarRapido(@RequestBody CategoriaLancamento categoria){
+        try{
+            categoria = categoriaLancamentoService.salvar(categoria);
+        }catch (CategoriaJaCadastradoException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok(categoria);
+    }
+
+    @GetMapping("/tipo")
+    public ModelAndView tipoCategoria(){
+        ModelAndView mv = new ModelAndView("categoria/tipo_cadastro");
+        mv.addObject("tipoCategorias", tipoCategoriaService.getTipoCategoria());
+        return mv;
+    }
+
+    @PostMapping("/cadastro/tipo")
+    public String cadastrar(@ModelAttribute TipoCategoria tipoCategoria){
+        tipoCategoriaService.salvar(tipoCategoria);
+        return "redirect:/categoria/tipo";
     }
 }

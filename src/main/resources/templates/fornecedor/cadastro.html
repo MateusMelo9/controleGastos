@@ -10,14 +10,14 @@ layout:decorate="layout/layout-padrao">
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Categoria Lançamento</h3>
-                        <p class="text-subtitle text-muted">Cadastro de Categoria Lançamento</p>
+                        <h3>Fornecedor</h3>
+                        <p class="text-subtitle text-muted">Cadastro de Fornedor</p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a th:href="@{/index}">Inicio</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Cadastro Categoria Lançamento</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cadastro Fornedor</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,32 +32,41 @@ layout:decorate="layout/layout-padrao">
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" th:action="@{/categoria/cadastro}" th:object="${categoria}" method="post">
+                                    <form class="form" th:action="@{/fornecedor/cadastro}" th:object="${fornecedor}" method="post">
                                         <div class="row">
-                                            <div class="col-md-3 mb-4">
-                                                <fieldset class="form-group">
-                                                    <label>Tipo Categoria</label>
-                                                    <select th:field="${categoria.tipoCategoria}" class="form-select" id="tipoSelect">
-                                                        <option value="">Escolha o Tipo</option>
-                                                        <option th:each="tipo : ${tipoCategorias}"
-                                                                th:value="${tipo.id}"
-                                                                th:text="${tipo.nome}">
-                                                        </option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-nome-column">Nome</label>
-                                                    <input type="text" id="first-nome-column" class="form-control"
-                                                           placeholder="Nome" name="nome"  th:field="${categoria.nome}">
+                                                    <label for="first-name-column">Nome</label>
+                                                    <input type="text" id="first-name-column" class="form-control"
+                                                           placeholder="Nome" name="nome"  th:field="${fornecedor.nome}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-descricao-column">Descriçao</label>
-                                                    <input type="text" id="first-descricao-column" class="form-control"
-                                                           placeholder="Descriçao" name="descricao"  th:field="${categoria.descricao}">
+                                                    <label for="first-rua-column">Rua</label>
+                                                    <input type="text" id="first-rua-column" class="form-control"
+                                                           placeholder="Rua" name="rua"  th:field="${fornecedor.endereco.rua}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-bairro-column">Bairro</label>
+                                                    <input type="text" id="first-bairro-column" class="form-control"
+                                                           placeholder="Bairro" name="bairro"  th:field="${fornecedor.endereco.bairro}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-cidade-column">Cidade</label>
+                                                    <input type="text" id="first-cidade-column" class="form-control"
+                                                           placeholder="Cidade" name="cidade"  th:field="${fornecedor.endereco.cidade}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-cep-column">CEP</label>
+                                                    <input type="text" id="first-cep-column" class="form-control"
+                                                           placeholder="CEP" name="cep"  th:field="${fornecedor.endereco.cep}">
                                                 </div>
                                             </div>
 
@@ -78,7 +87,7 @@ layout:decorate="layout/layout-padrao">
                     <div class="col-12 col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Lista de Categorias Lançamento</h4>
+                                <h4 class="card-title">Lista de Lançamentos</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -87,16 +96,20 @@ layout:decorate="layout/layout-padrao">
                                         <table class="table table-lg">
                                             <thead>
                                             <tr>
-                                                <th>Tipo</th>
                                                 <th>Nome</th>
-                                                <th>Descricao</th>
+                                                <th>Rua</th>
+                                                <th>Bairro</th>
+                                                <th>Cidade</th>
+                                                <th>CEP</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="categoria : ${categorias}" class="border_bottom">
-                                                <td th:text="${categoria.tipoCategoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.nome}" class="text-bold-500"></td>
-                                                <td th:text="${categoria.descricao}" class="text-bold-500"></td>
+                                            <tr th:each="fornecedor : ${fornecedores}" class="border_bottom">
+                                                <td th:text="${fornecedor.nome}" class="text-bold-500"></td>
+                                                <td th:text="${fornecedor.endereco.rua}" class="text-bold-500"></td>
+                                                <td th:text="${fornecedor.endereco.bairro}" class="text-bold-500"></td>
+                                                <td th:text="${fornecedor.endereco.cidade}" class="text-bold-500"></td>
+                                                <td th:text="${fornecedor.endereco.cep}" class="text-bold-500"></td>
                                             </tr>
                                             </tbody>
                                         </table>

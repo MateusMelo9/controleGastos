@@ -19,16 +19,14 @@ public class Casa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String nome;
 
     @OneToOne
-    private Endereco endereco;
-    private double valorTerreno;
+    private Terreno terreno;
 
-    @OneToMany
-    @JoinColumn(name = "id_casa")
-    private List<Parceria> parcerias;
+    @OneToOne
+    private Parceria parceria;
 
-    @OneToMany
-    @JoinColumn(name = "id_casa")
-    private List<Gastos> gastos;
+    @OneToMany(mappedBy = "casa")
+    private List<Lancamento> lancamentos;
 }

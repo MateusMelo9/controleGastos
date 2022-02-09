@@ -23,9 +23,7 @@ public class Banco implements Serializable {
     private Integer codigo;
     private String nome;
 
-    @OneToMany
-    @JoinColumn(name = "id_banco")
+    @OneToMany(mappedBy = "banco")
     private List<Conta> contas;
-
 
 }

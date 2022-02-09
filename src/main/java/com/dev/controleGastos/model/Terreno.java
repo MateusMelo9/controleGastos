@@ -5,23 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Categoria implements Serializable {
-
-    private static final long serialVersionUis = 1L;
+public class Terreno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String nome;
-
-    @OneToMany
-    @JoinColumn(name = "id_categoria")
-    private List<Lancamento> lancamentos;
+    private double valor;
+    private double taxaDocumentacao;
+    @OneToOne
+    private Endereco endereco;
 }
