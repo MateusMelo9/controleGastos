@@ -23,6 +23,7 @@ public class Lancamento implements Serializable {
     private Date data;
     private double valor;
     private String descricao;
+    private Integer quantidade;
 
     @ManyToOne
     @JoinColumn(name = "id_conta")

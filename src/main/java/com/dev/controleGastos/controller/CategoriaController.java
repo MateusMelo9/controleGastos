@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/categoria")
 public class CategoriaController {
@@ -32,7 +35,6 @@ public class CategoriaController {
         mv.addObject("categoria", new CategoriaLancamento());
         mv.addObject("tipoCategorias", tipoCategoriaService.getTipoCategoria());
         mv.addObject("categorias", categoriaLancamentoService.getCategoriasLancamento());
-        mv.addObject("fornecedores",fornecedorService.getForncedores());
         return mv;
     }
 
@@ -54,6 +56,17 @@ public class CategoriaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok(categoria);
+    }
+
+    @RequestMapping(value = "/buscar/categoria", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody ResponseEntity<?> buscarCategoriaPorTipo(@RequestBody TipoCategoria tipoCategoria){
+        List<CategoriaLancamento> categorias = new ArrayList<>();
+        try{
+            categorias = categoriaLancamentoService.buscarCategoriaPorTipo(tipoCategoria);
+        }catch (CategoriaJaCadastradoException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok(categorias);
     }
 
     @GetMapping("/tipo")

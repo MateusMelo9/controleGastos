@@ -36,7 +36,7 @@ layout:decorate="layout/layout-padrao">
                                         <div class="row">
                                             <div class="col-md-3 mb-4">
                                                 <fieldset class="form-group">
-                                                    <label for="first-name-column">Tipo</label>
+                                                    <label for="tipoSelect">Tipo</label>
                                                     <select th:field="${lancamento.tipo}" class="form-select" id="tipoSelect">
                                                         <option value="">Escolha o Tipo</option>
                                                         <option th:each="tipo : ${tipos}"
@@ -48,7 +48,7 @@ layout:decorate="layout/layout-padrao">
                                             </div>
                                             <div class="col-md-3 mb-4">
                                                 <fieldset class="form-group">
-                                                    <label for="first-name-column">Casa</label>
+                                                    <label for="casaSelect">Casa</label>
                                                     <select th:field="${lancamento.casa}" class="form-select" id="casaSelect">
                                                         <option value="">Escolha a Casa</option>
                                                         <option th:each="casa : ${casas}"
@@ -61,7 +61,7 @@ layout:decorate="layout/layout-padrao">
                                             <div class="col-md-3 mb-4">
                                                 <fieldset class="form-group">
                                                     <label for="tipoCatSelect">Tipo Categoria</label>
-                                                    <select th:field="${lancamento.categoria}" class="form-select" id="tipoCatSelect">
+                                                    <select class="form-select" id="tipoCatSelect">
                                                         <option value="">Escolha a Categoria</option>
                                                         <option th:each="tipo : ${tiposCategoria}"
                                                                 th:value="${tipo.id}"
@@ -88,10 +88,10 @@ layout:decorate="layout/layout-padrao">
                                                     <a href="#" class="btn btn-info rounded-pill">+</a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 mb-4">
+                                            <div class="col-md-3 mb-4">
                                                 <fieldset class="form-group">
                                                     <label for="bancoSelect">Banco</label>
-                                                    <select th:field="${lancamento.conta}" class="form-select" id="bancoSelect">
+                                                    <select class="form-select" id="bancoSelect">
                                                         <option value="">Escolha o Banco</option>
                                                         <option th:each="conta : ${contas}"
                                                                 th:value="${conta.id}"
@@ -100,7 +100,7 @@ layout:decorate="layout/layout-padrao">
                                                     </select>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-md-4 mb-4">
+                                            <div class="col-md-3 mb-4">
                                                 <fieldset class="form-group">
                                                     <label for="contaSelect">Conta</label>
                                                     <select th:field="${lancamento.conta}" class="form-select" id="contaSelect">
@@ -112,10 +112,17 @@ layout:decorate="layout/layout-padrao">
                                                     </select>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-md-4 col-12">
+                                            <div class="col-md-3 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-name-column">Valor</label>
-                                                    <input type="text" id="first-name-column" class="form-control js-decimal"
+                                                    <label for="first-qtd-column">Quantidade</label>
+                                                    <input type="text" id="first-qtd-column" class="form-control"
+                                                           placeholder="Quantidade" name="quantidade" th:field="${lancamento.quantidade}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-12">
+                                                <div class="form-group">
+                                                    <label for="first-valor-column">Valor</label>
+                                                    <input type="text" id="first-valor-column" class="form-control"
                                                            placeholder="Valor" name="valor" th:field="${lancamento.valor}">
                                                 </div>
                                             </div>
@@ -183,7 +190,6 @@ layout:decorate="layout/layout-padrao">
         </div>
     </div>
 
-<!--    <div th:replace="categoria/cadastro_rapido_categoria :: modal"></div>-->
 </section>
 <th:block layout:fragment="javascript-extra">
     <script th:src="@{/javascript/categoria-cadastro-rapido.js}"></script>

@@ -39,7 +39,7 @@ public class LancamentoController {
         mv.addObject("lancamentos", service.getLancamentos());
         mv.addObject("tipos", TipoLancamento.values());
         mv.addObject("casas", casaService.getCasas());
-        mv.addObject("categorias",categoriaLancamentoService.getCategoriasLancamento());
+//        mv.addObject("categorias",categoriaLancamentoService.getCategoriasLancamento());
         mv.addObject("contas", contaService.getContas());
         mv.addObject("tiposCategoria", tipoCategoriaService.getTipoCategoria());
         return mv;

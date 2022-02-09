@@ -1,6 +1,7 @@
 package com.dev.controleGastos.service;
 
 import com.dev.controleGastos.model.CategoriaLancamento;
+import com.dev.controleGastos.model.TipoCategoria;
 import com.dev.controleGastos.repository.CategoriaLancamentoRepository;
 import com.dev.controleGastos.service.exception.CategoriaJaCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class CategoriaLancamentoService {
             throw new CategoriaJaCadastradoException("Categoria já cadastrado!");
         }
         return repository.saveAndFlush(categoria);
+    }
+
+    public List<CategoriaLancamento> buscarCategoriaPorTipo(TipoCategoria tipoCategoria){
+        return repository.findBytipoCategoria(tipoCategoria);
     }
 
     public List<CategoriaLancamento> getCategoriasLancamento(){

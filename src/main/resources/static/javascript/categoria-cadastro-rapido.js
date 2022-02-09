@@ -12,15 +12,42 @@ $(function(){
     var selectValue = 0;
     var selectText = '';
 
-    selectTipoCat.on('change', function () {
-      selectValue = this.value;
-      selectText = $(this).find('option').filter(':selected').text();
-    });
+    selectTipoCat.on('change',onBuscarCategoria);
 
     botaoModal.on('click', onBotaoModalClick);
     modal.on('shown.bs.modal', onModalShow);
     modal.on('hide.bs.modal', onModalClose);
     botaoSalvar.on('click', onBotaoSalvarClick);
+
+    function onBuscarCategoria() {
+      selectValue = this.value;
+      selectText = $(this).find('option').filter(':selected').text();
+      console.log('Value: ',selectValue);
+      console.log('Text: ',selectText);
+      $.ajax({
+    	  url: '/categoria/buscar/categoria',
+    	  method: 'POST',
+    	  contentType: 'application/json',
+    	  data: JSON.stringify({id: selectValue,
+    		  nome: selectText}),
+    	  error: onErroBuscarCategoria,
+    	  success: onBuscarCategoriaConcluido
+      });
+    }
+
+    function onBuscarCategoriaConcluido(resultado){
+    	var selectCatLanc = $('#catLancSelect');
+    	selectCatLanc.find('option:not(:first)').remove();
+
+    	for (var i = 0; i < resultado.length; i ++ ){
+            console.log(resultado[i].nome);
+            selectCatLanc.append('<option value='+resultado[i].id+'>'+resultado[i].nome+'</option>');
+        }
+    }
+
+    function onErroBuscarCategoria(obj){
+    	console.log('Mensagem erro: ',obj);
+    }
 
     function onBotaoModalClick(){
         if(selectValue == 0){
@@ -65,6 +92,6 @@ $(function(){
 
     function onErroSalvando(obj){
         var mensagemErro = obj.responseTest;
-        console.log(mensagemErro);
+        console.log('Erro: '+mensagemErro);
     }
 });
